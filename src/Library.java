@@ -11,11 +11,11 @@ public class Library {
 
         System.out.println(appName);
         System.out.println("Książki dostępne w bibliotece:");
-        System.out.println(title);
-        System.out.println("Autor: " + author);
-        System.out.println("Data wydania: " + relaseDate);
-        System.out.println("Ilość stron: " + pages);
-        System.out.println("Wydawca: " + publisher);
+        System.out.print(title + ", ");
+        System.out.print("Autor: " + author + ", ");
+        System.out.print("Data wydania: " + relaseDate + ", ");
+        System.out.print("Ilość stron: " + pages + ", ");
+        System.out.print("Wydawca: " + publisher + ", ");
         System.out.println("ISBN: " + isbn);
 
     }
