@@ -1,7 +1,7 @@
 package pl.javastart.library.model;
 
 public class Library {
-    private int maxBooks = 1000;
+    private static int maxBooks = 1000;
     private Book[] books = new Book[maxBooks];
     private int booksNumber = 0;
 
