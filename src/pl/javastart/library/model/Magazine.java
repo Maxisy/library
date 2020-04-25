@@ -5,15 +5,12 @@ public class Magazine extends Publication{
     private int day;
     private String language;
 
-    public Magazine(String title, String publisher, int day, int month, int year, String language) {
-        setTitle(title);
-        setYear(year);
-        setPublisher(publisher);
+    public Magazine(String title, String publisher, int year, int month, int day, String language) {
+        super(title, publisher, year);
         this.month = month;
         this.day = day;
         this.language = language;
     }
-
 
     public int getMonth() {
         return month;
