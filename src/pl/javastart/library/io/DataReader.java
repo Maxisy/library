@@ -8,45 +8,52 @@ import java.util.Scanner;
 
 public class DataReader {
     private Scanner scanner = new Scanner(System.in);
+    private ConsolePrinter printer;
+
+    public DataReader(ConsolePrinter printer) {
+        this.printer = printer;
+    }
 
     public Book readAndCreateBook() {
-        System.out.println("Tytuł:");
+        printer.printLine("Tytuł:");
         String title = scanner.nextLine();
-        System.out.println("Autor:");
+        printer.printLine("Autor:");
         String author = scanner.nextLine();
-        System.out.println("Wydawnictwo:");
+        printer.printLine("Wydawnictwo:");
         String publisher = scanner.nextLine();
-        System.out.println("ISBN:");
+        printer.printLine("ISBN:");
         String isbn = scanner.nextLine();
-        System.out.println("Rok wydania:");
+        printer.printLine("Rok wydania:");
         int releaseDate = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Ilość stron:");
+        printer.printLine("Ilość stron:");
         int pages = scanner.nextInt();
         scanner.nextLine();
         return new Book(title, author, releaseDate, pages, publisher, isbn);
     }
 
     public Magazine readAndCreateMagazine() {
-        System.out.println("Tytuł:");
+        printer.printLine("Tytuł:");
         String title = scanner.nextLine();
-        System.out.println("Wydawnictwo:");
+        printer.printLine("Wydawnictwo:");
         String publisher = scanner.nextLine();
-        System.out.println("Dzień wydania:");
+        printer.printLine("Dzień wydania:");
         int releaseDay = getInt();
-        System.out.println("Miesiąc wydania:");
+        printer.printLine("Miesiąc wydania:");
         int releaseMonth = getInt();
-        System.out.println("Rok wydania:");
+        printer.printLine("Rok wydania:");
         int releaseYear =  getInt();
-        System.out.println("Język:");
+        printer.printLine("Język:");
         String language = scanner.nextLine();
         return new Magazine(title, publisher, releaseDay, releaseMonth, releaseYear, language);
     }
 
     public int getInt(){
-        int number = scanner.nextInt();
-        scanner.nextLine();
-        return number;
+        try {
+            return scanner.nextInt();
+        } finally {
+            scanner.nextLine();
+        }
     }
 
     public void close(){
