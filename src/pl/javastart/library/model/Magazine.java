@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Magazine extends Publication{
     public static final String TYPE = "Magazyn";
-    private int month;
-    private int day;
+    private static int month;
+    private static int day;
     private String language;
 
     public Magazine(String title, String publisher, int year, int month, int day, String language) {
@@ -15,7 +15,7 @@ public class Magazine extends Publication{
         this.language = language;
     }
 
-    public int getMonth() {
+    public static int getMonth() {
         return month;
     }
 
@@ -23,7 +23,7 @@ public class Magazine extends Publication{
         this.month = month;
     }
 
-    public int getDay() {
+    public static int getDay() {
         return day;
     }
 

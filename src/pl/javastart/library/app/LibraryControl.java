@@ -54,6 +54,12 @@ class LibraryControl {
                 case PRINT_MAGAZINES:
                     printMagazines();
                     break;
+                case DELETE_BOOK:
+                    deleteBook();
+                    break;
+                case DELETE_MAGAZINE:
+                    deleteMagazine();
+                    break;
                 case EXIT:
                     exit();
                     break;
@@ -95,6 +101,21 @@ class LibraryControl {
         }
     }
 
+    private void deleteMagazine() {
+        try {
+            String title = dataReader.readMagazineToDeleteTitle();
+            int year = dataReader.readMagazineToDeleteYear();
+            int month = dataReader.readMagazineToDeleteMonth();
+            int day = dataReader.readMagazineToDeleteDay();
+            if (library.removeMagazine(title, year, month, day))
+                printer.printLine("Usunięto magazyn");
+            else
+                printer.printLine("Brak wskazanego magazynu");
+        } catch (InputMismatchException e) {
+            printer.printLine("Niepoprawne dane");
+        }
+    }
+
     private void exit() {
         try {
             fileManager.exportData(library);
@@ -122,6 +143,14 @@ class LibraryControl {
         }
     }
 
+    private void deleteBook() {
+        String isbn = dataReader.readBookToDelete();
+        if (library.removeBook(isbn))
+            printer.printLine("Usunięto książkę");
+        else
+            printer.printLine("Brak wskazanej książki");
+    }
+
     private void printOptions() {
         printer.printLine("Wybierz opcję:");
         for (Option value : Option.values()) {
@@ -134,7 +163,9 @@ class LibraryControl {
         ADD_BOOK(1, "dodanie nowej książki"),
         ADD_MAGAZINE(2, "dodanie nowego magazynu"),
         PRINT_BOOKS(3, "wyświetl dostępne książki"),
-        PRINT_MAGAZINES(4, "wyświetl dostępne magazyny");
+        PRINT_MAGAZINES(4, "wyświetl dostępne magazyny"),
+        DELETE_BOOK(5, "usuń książkę"),
+        DELETE_MAGAZINE(6, "usuń magazyn");
 
         private final int value;
         private final String description;

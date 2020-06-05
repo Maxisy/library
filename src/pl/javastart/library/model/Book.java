@@ -6,7 +6,7 @@ public class Book extends Publication{
     public static final String TYPE = "Książka";
     private String author;
     private int pages;
-    private String isbn;
+    private static String isbn;
 
     public Book(String title, String author, int year, int pages, String publisher, String isbn) {
         super(title, publisher, year);
@@ -32,7 +32,7 @@ public class Book extends Publication{
     }
 
 
-    public String getIsbn() {
+    public static String getIsbn() {
         return isbn;
     }
 

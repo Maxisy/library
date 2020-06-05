@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Publication implements Serializable {
-    private int year;
-    private String title;
+    private static int year;
+    private static String title;
     private String publisher;
 
     public Publication(String title, String publisher, int year) {
@@ -14,7 +14,7 @@ public abstract class Publication implements Serializable {
         this.publisher = publisher;
     }
 
-    public int getYear() {
+    public static int getYear() {
         return year;
     }
 
@@ -22,7 +22,7 @@ public abstract class Publication implements Serializable {
         this.year = year;
     }
 
-    public String getTitle() {
+    public static String getTitle() {
         return title;
     }
 

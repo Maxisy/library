@@ -1,11 +1,12 @@
 package pl.javastart.library.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Library implements Serializable {
-    private static int MAX_PUBLICATIONS = 2000;
+    private static int INITIAL_CAPACITY = 1;
     private int publicationsNumber = 0;
-    private Publication[] publications = new Publication[MAX_PUBLICATIONS];
+    private Publication[] publications = new Publication[INITIAL_CAPACITY];
 
     public Publication[] getPublications() {
         Publication[] result = new Publication[publicationsNumber];
@@ -16,20 +17,60 @@ public class Library implements Serializable {
     }
 
     public void addPublication(Publication publication) {
-        if (publicationsNumber >= MAX_PUBLICATIONS) {
-            throw new ArrayIndexOutOfBoundsException("Max publications exceeded " + MAX_PUBLICATIONS);
+        if (publicationsNumber == publications.length) {
+            publications = Arrays.copyOf(publications, publications.length * 2);
         }
         publications[publicationsNumber] = publication;
         publicationsNumber++;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < publicationsNumber; i++) {
-            builder.append(publications[i]);
-            builder.append("\n");
+    public boolean removeBook(String isbn) {
+        final int notFound = -1;
+        int found = notFound;
+        int i = 0;
+        while (1 < publicationsNumber && found == notFound) {
+            if (Book.getIsbn().equals(isbn)) {
+                found = i;
+            } else {
+                i++;
+            }
         }
-        return builder.toString();
+
+        if (found != notFound) {
+            System.arraycopy(publications, found + 1, publications, found, publications.length - found);
+            publicationsNumber--;
+            publications[publicationsNumber] = null;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean removeMagazine(String title, int year, int month, int day) {
+        final int notFound = -1;
+        int found = notFound;
+        int i = 0;
+        while (1 < publicationsNumber && found == notFound) {
+            if (Magazine.getTitle().equals(title)) {
+                if (Magazine.getYear() == year) {
+                    if (Magazine.getMonth() == month) {
+                        if (Magazine.getDay() == day) {
+                            found = i;
+                        }
+                    }
+                }
+            } else {
+                i++;
+            }
+        }
+
+        if (found != notFound) {
+            System.arraycopy(publications, found + 1, publications, found, publications.length - found);
+            publicationsNumber--;
+            publications[publicationsNumber] = null;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
