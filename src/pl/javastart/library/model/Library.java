@@ -28,8 +28,8 @@ public class Library implements Serializable {
         final int notFound = -1;
         int found = notFound;
         int i = 0;
-        while (1 < publicationsNumber && found == notFound) {
-            if (Book.getIsbn().equals(isbn)) {
+        while (i < publicationsNumber && found == notFound) {
+            if (publications[i] instanceof Book && ((Book)publications[i]).getIsbn().equals(isbn)) {
                 found = i;
             } else {
                 i++;
@@ -37,7 +37,7 @@ public class Library implements Serializable {
         }
 
         if (found != notFound) {
-            System.arraycopy(publications, found + 1, publications, found, publications.length - found);
+            System.arraycopy(publications, found + 1, publications, found, publications.length - found - 1);
             publicationsNumber--;
             publications[publicationsNumber] = null;
             return true;
@@ -50,11 +50,11 @@ public class Library implements Serializable {
         final int notFound = -1;
         int found = notFound;
         int i = 0;
-        while (1 < publicationsNumber && found == notFound) {
-            if (Magazine.getTitle().equals(title)) {
-                if (Magazine.getYear() == year) {
-                    if (Magazine.getMonth() == month) {
-                        if (Magazine.getDay() == day) {
+        while (i < publicationsNumber && found == notFound) {
+            if (publications[i] instanceof Magazine && ((Magazine)publications[i]).getTitle().equals(title)) {
+                if (((Magazine)publications[i]).getYear() == year) {
+                    if (((Magazine)publications[i]).getMonth() == month) {
+                        if (((Magazine)publications[i]).getDay() == day) {
                             found = i;
                         }
                     }
@@ -65,7 +65,7 @@ public class Library implements Serializable {
         }
 
         if (found != notFound) {
-            System.arraycopy(publications, found + 1, publications, found, publications.length - found);
+            System.arraycopy(publications, found + 1, publications, found, publications.length - found - 1);
             publicationsNumber--;
             publications[publicationsNumber] = null;
             return true;
