@@ -12,7 +12,7 @@ public class Magazine extends Publication{
         super(title, publisher, year);
     }
 
-    public Magazine(String title, String publisher, int year, int month, int day, String language) {
+    public Magazine(String title, String publisher, int day, int month, int year, String language) {
         super(title, publisher, year);
         this.month = month;
         this.day = day;

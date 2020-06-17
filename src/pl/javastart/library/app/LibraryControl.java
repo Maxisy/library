@@ -13,6 +13,7 @@ import pl.javastart.library.model.Library;
 import pl.javastart.library.model.Magazine;
 import pl.javastart.library.model.Publication;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 class LibraryControl {

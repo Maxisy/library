@@ -49,7 +49,7 @@ public class CsvFileManager implements FileManager {
         int month = Integer.valueOf(data[4]);
         int year = Integer.valueOf(data[5]);
         String language = data[6];
-        return new Magazine(title, publisher, year, month, day, language);
+        return new Magazine(title, publisher, day, month, year, language);
     }
 
     private Book createBook(String[] data) {

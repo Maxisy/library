@@ -56,8 +56,14 @@ public class Library implements Serializable {
                     if (((Magazine)publications[i]).getMonth() == month) {
                         if (((Magazine)publications[i]).getDay() == day) {
                             found = i;
+                        } else {
+                            i++;
                         }
+                    } else {
+                        i++;
                     }
+                } else {
+                    i++;
                 }
             } else {
                 i++;
