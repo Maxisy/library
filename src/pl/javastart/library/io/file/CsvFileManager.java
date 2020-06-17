@@ -45,9 +45,9 @@ public class CsvFileManager implements FileManager {
     private Magazine createMagazine(String[] data) {
         String title = data[1];
         String publisher = data[2];
-        int day = Integer.valueOf(data[3]);
+        int day = Integer.valueOf(data[5]);
         int month = Integer.valueOf(data[4]);
-        int year = Integer.valueOf(data[5]);
+        int year = Integer.valueOf(data[3]);
         String language = data[6];
         return new Magazine(title, publisher, day, month, year, language);
     }
