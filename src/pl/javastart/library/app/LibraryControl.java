@@ -119,9 +119,9 @@ class LibraryControl {
     private void deleteMagazine() {
         try {
             String title = dataReader.readMagazineToDeleteTitle();
-            int year = dataReader.readMagazineToDeleteYear();
-            int month = dataReader.readMagazineToDeleteMonth();
             int day = dataReader.readMagazineToDeleteDay();
+            int month = dataReader.readMagazineToDeleteMonth();
+            int year = dataReader.readMagazineToDeleteYear();
             if (library.removeMagazine(title, year, month, day))
                 printer.printLine("Usunięto magazyn");
             else

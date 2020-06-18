@@ -54,7 +54,7 @@ public class Book extends Publication{
 
     @Override
     public String toString() {
-        return super.toString() + "; " + author + "; " + pages + "; " + isbn;
+        return getTitle() + "; " + author + "; " + getPublisher() + "; " + getYear() + "; " + pages + "; " + isbn;
     }
 
     @Override
