@@ -12,6 +12,9 @@ import pl.javastart.library.model.Book;
 import pl.javastart.library.model.Library;
 import pl.javastart.library.model.Magazine;
 import pl.javastart.library.model.Publication;
+import pl.javastart.library.model.comparator.AuthorComparator;
+import pl.javastart.library.model.comparator.DateComparator;
+import pl.javastart.library.model.comparator.TitleComparator;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -87,8 +90,19 @@ class LibraryControl {
     }
 
     private void printMagazines() {
-        Publication[] publications = library.getPublications();
+        Publication[] publications = getSortedMagazines();
         printer.printMagazines(publications);
+    }
+
+    private Publication[] getSortedMagazines() {
+        Publication[] publications = library.getPublications();
+        int option = dataReader.readMagazinesSort();
+        if (option == 1) {
+            Arrays.sort(publications, new TitleComparator());
+        } else {
+            Arrays.sort(publications, new DateComparator());
+        }
+        return publications;
     }
 
     private void addMagazine() {
@@ -129,8 +143,22 @@ class LibraryControl {
     }
 
     private void printBooks() {
-        Publication[] publications = library.getPublications();
+
+        Publication[] publications = getSortedBooks();
         printer.printBooks(publications);
+    }
+
+    private Publication[] getSortedBooks() {
+        Publication[] publications = library.getPublications();
+        int option = dataReader.readBooksSort();
+        if (option == 1) {
+            Arrays.sort(publications, new TitleComparator());
+        } else if (option == 2) {
+            Arrays.sort(publications, new AuthorComparator());
+        } else if (option == 3) {
+            Arrays.sort(publications, new DateComparator());
+        }
+        return publications;
     }
 
     private void addBook() {
