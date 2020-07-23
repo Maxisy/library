@@ -3,6 +3,8 @@ package pl.javastart.library.io;
 import pl.javastart.library.exception.NoSuchOptionException;
 import pl.javastart.library.model.Book;
 
+import pl.javastart.library.model.Library;
+import pl.javastart.library.model.LibraryUser;
 import pl.javastart.library.model.Magazine;
 
 import java.sql.Struct;
@@ -50,6 +52,15 @@ public class DataReader {
         return new Magazine(title, publisher, releaseDay, releaseMonth, releaseYear, language);
     }
 
+    public LibraryUser createLibraryUser() {
+        printer.printLine("Imię:");
+        String firstName = scanner.nextLine();
+        printer.printLine("Nazwisko:");
+        String lastName = scanner.nextLine();
+        printer.printLine("PESEL:");
+        String pesel = scanner.nextLine();
+        return new LibraryUser(firstName, lastName, pesel);
+    }
 
     public String readMagazineToDeleteTitle() {
         printer.printLine("Tytuł:");
