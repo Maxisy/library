@@ -5,14 +5,12 @@ import pl.javastart.library.io.ConsolePrinter;
 import pl.javastart.library.io.DataReader;
 import pl.javastart.library.io.file.FileManager;
 import pl.javastart.library.io.file.FileManagerBuilder;
-import pl.javastart.library.model.*;
-import pl.javastart.library.model.comparator.AuthorComparator;
-import pl.javastart.library.model.comparator.DateComparator;
-import pl.javastart.library.model.comparator.TitleComparator;
+import pl.javastart.library.model.Book;
+import pl.javastart.library.model.Library;
+import pl.javastart.library.model.LibraryUser;
+import pl.javastart.library.model.Magazine;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.Map;
 
 class LibraryControl {
 
@@ -88,7 +86,8 @@ class LibraryControl {
     }
 
     private void printUsers() {
-        printer.printUsers(library.getUsers().values());
+        printer.printUsers(library.getSortedUsers(
+                (p1, p2) -> p1.getLastName().compareToIgnoreCase(p2.getLastName())));
     }
 
     private void addUser() {
@@ -117,7 +116,9 @@ class LibraryControl {
     }
 
     private void printMagazines() {
-        printer.printMagazines(library.getPublications().values());
+        printer.printMagazines(library.getSortedPublications(
+                ((p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle()))
+        ));
     }
 
     private void addMagazine() {
@@ -155,7 +156,8 @@ class LibraryControl {
     }
 
     private void printBooks() {
-        printer.printBooks(library.getPublications().values());
+        printer.printBooks(library.getSortedPublications((
+                (p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle()))));
     }
 
     private void addBook() {
