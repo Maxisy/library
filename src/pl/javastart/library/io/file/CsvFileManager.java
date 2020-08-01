@@ -23,15 +23,15 @@ public class CsvFileManager implements FileManager {
 
     private void importUsers(Library library) {
         try (
-                Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))
+                BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_NAME))
         ) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                LibraryUser libUser = createUserFromString(line);
-                library.addUser(libUser);
-            }
+            reader.lines()
+                    .map(this::createUserFromString)
+                    .forEach(library::addUser);
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku: " + e.getMessage());
         }
     }
 
@@ -45,15 +45,15 @@ public class CsvFileManager implements FileManager {
 
     private void importPublications(Library library) {
         try (
-                Scanner fileReader = new Scanner(new File(FILE_NAME))
+                BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))
         ) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                Publication publication = createObjectFromString(line);
-                library.addPublication(publication);
-            }
+            reader.lines()
+                    .map(this::createObjectFromString)
+                    .forEach(library::addPublication);
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku: " + e.getMessage());
         }
     }
 
@@ -107,7 +107,7 @@ public class CsvFileManager implements FileManager {
     private <T extends CsvConvertible> void exportToCsv(Collection<T> collection, String fileName) {
         try (
                 var fileWriter = new FileWriter(fileName);
-                var bufferedWriter = new BufferedWriter(fileWriter);
+                var bufferedWriter = new BufferedWriter(fileWriter)
         ) {
             for (T element : collection) {
                 bufferedWriter.write(element.toCsv());
